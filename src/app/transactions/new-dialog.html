@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Add new Transaction</h1>
+<div mat-dialog-content>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.id" value="id">
+    </mat-form-field>
+    <mat-form-field>
+
+      <input matInput [(ngModel)]="data.user">
+
+    </mat-form-field>
+    <mat-form-field>
+
+      <input matInput [(ngModel)]="data.amount">
+
+    </mat-form-field>
+    <mat-form-field>
+
+      <input matInput [(ngModel)]="data.currency">
+
+    </mat-form-field>
+    <mat-form-field>
+
+      <input matInput [(ngModel)]="data.txn_date">
+    </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add</button>
+</div>
+
+

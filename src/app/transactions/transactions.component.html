@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="button-row new-btn">
+
+    <!-- <button mat-raised-button color="primary" (click)="openDialog()">New</button>  -->
+    <button mat-mini-fab (click)="openDialog()">
+              <mat-icon aria-label="Add new">add</mat-icon>
+            </button>
+
+  </div>
+
+
+  <div class="example-header" *ngIf="!transactionDetail">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="example-container mat-elevation-z8" *ngIf="!transactionDetail">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <!-- User Column -->
+      <ng-container matColumnDef="user">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> User </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.user}}</mat-cell>
+      </ng-container>
+
+      <!-- Currency Column -->
+      <ng-container matColumnDef="currency">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Currency </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.currency}} </mat-cell>
+      </ng-container>
+
+      <!-- Amount Column -->
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.amount}} </mat-cell>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="txn_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.txn_date}} </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <div *ngIf="transactionDetail" class="update-form mat-elevation-z8">
+    <h2>Update {{selectedData[0].id | uppercase}} Details</h2>
+    <div>
+          <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="selectedData[0].id" placeholder="id">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="selectedData[0].user" placeholder="User">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="selectedData[0].amount" placeholder="Amount">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="selectedData[0].currency" placeholder="Currency">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="selectedData[0].txn_date" placeholder="Date">
+          </mat-form-field>
+    </div>
+    <div class="button-row">
+      <button mat-raised-button (click)="cancelTxn()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="updateTxn()">Update</button>
+    </div>
+  </div>
+
+</div>
